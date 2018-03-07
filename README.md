@@ -1,6 +1,9 @@
 # chromium-headless-printtopdf
 Basic setup for testing Chrome Headless printToPDF issues
 
+#### https://bugs.chromium.org/p/chromium/issues/detail?id=819735
+#### https://bugs.chromium.org/p/chromium/issues/detail?id=774970
+
 ### repo setup
 ```sh
 git clone https://github.com/soncodi/chromium-headless-printtopdf.git
