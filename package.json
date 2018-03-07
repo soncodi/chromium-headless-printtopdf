@@ -1,0 +1,20 @@
+{
+  "name": "chromium-headless-printtopdf",
+  "version": "1.0.0",
+  "description": "Basic setup for testing Chrome Headless printToPDF issues",
+  "main": "app.js",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/soncodi/chromium-headless-printtopdf.git"
+  },
+  "author": "Alex Soncodi",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/soncodi/chromium-headless-printtopdf/issues"
+  },
+  "homepage": "https://github.com/soncodi/chromium-headless-printtopdf#readme",
+  "dependencies": {
+    "chrome-remote-interface": "~0.25.5"
+  }
+}
