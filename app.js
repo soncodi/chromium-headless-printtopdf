@@ -1,11 +1,13 @@
 const fs = require('fs');
 const CDP = require('chrome-remote-interface');
 
+const port = 9222;
+
 async function pdf(content, size) {
   let client;
 
   try {
-    client = await CDP();
+    client = await CDP({ port });
 
     const { Network, Page } = client;
 
