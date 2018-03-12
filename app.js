@@ -20,12 +20,12 @@ async function pdf(content, size) {
     await Page.loadEventFired();
 
     const pdfData = await Page.printToPDF({
-      landscape:           size.landscape,
+      landscape:           true,
       displayHeaderFooter: false,
       printBackground:     true,
       scale:               1,
-      paperHeight:         size.h,
-      paperWidth:          size.w,
+      paperHeight:         4,
+      paperWidth:          3,
       marginTop:           0,
       marginLeft:          0,
       marginRight:         0,
@@ -55,7 +55,7 @@ async function pdf(content, size) {
 
   console.log(`loaded source HTML [${src.length} bytes]`);
 
-  const pdfContent = await pdf(src, { landscape: true, w: 3, h: 4 });
+  const pdfContent = await pdf(src);
 
   console.log(`writing resulting PDF [${pdfContent.length} bytes]`);
 
