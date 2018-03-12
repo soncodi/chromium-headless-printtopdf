@@ -3,7 +3,7 @@ const CDP = require('chrome-remote-interface');
 
 const port = 9222;
 
-async function pdf(content, size) {
+async function pdf(content) {
   let client;
 
   try {
