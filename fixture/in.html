@@ -1,90 +1,33 @@
 <!DOCTYPE html>
+<html>
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     *, *:after, *:before { box-sizing: border-box; }
+
     body, html, div, table, tbody, tr, td { margin: 0; padding: 0; border: 0; }
 
-    .page {
-      position: relative;
-      margin: auto;
-      height: 3in;
-      width: 4in;
-      overflow: hidden;
-      page-break-inside: avoid;
-      border: 2px solid #000;
+    .imgbox {
+      width: 6in;
+      height: 4in;
+
+      background-image: url('https://images.pexels.com/photos/106399/pexels-photo-106399.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260');
+      background-repeat: no-repeat;
+      background-position: center center;
+      background-size: cover;
     }
 
-    .bleed {
-      background-color: blue;
-
-      position: absolute;
-      top: -0.25in;
-      left: -0.25in;
-      right: -0.25in;
-      bottom: -0.25in;
-    }
-
-    .bleed.ok {
-      top: 0;
-      bottom: 0;
-    }
-
-    .page-content {
-      table-layout: fixed;
-      border-collapse: collapse;
-
-      height: 100%;
-      background-color: #ff0;
+    .withfilter {
+      filter: contrast(101%);
     }
   </style>
 </head>
 
 <body>
-  <div class="page">
-    <div class="bleed">
-      <table cellspacing="0" cellpadding="0" border="0" class="page-content">
-        <tbody>
-          <tr>
-            <td valign="top">
-              <div>
-                xxxxxxxxxxxxxxxxxxx<br> xxxxxxxxxxxxxxxxxxx<br> xxxxxxxxxxxxxxxxxxx<br>
-              </div>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-  <div class="page">
-    <div class="bleed">
-      <table cellspacing="0" cellpadding="0" border="0" class="page-content">
-        <tbody>
-          <tr>
-            <td valign="top">
-              <div>
-                xxxxxxxxxxxxxxxxxxx<br> xxxxxxxxxxxxxxxxxxx<br> xxxxxxxxxxxxxxxxxxx<br>
-              </div>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-  <div class="page">
-    <div class="bleed ok">
-      <table cellspacing="0" cellpadding="0" border="0" class="page-content">
-        <tbody>
-          <tr>
-            <td valign="top">
-              <div>
-                xxxxxxxxxxxxxxxxxxx<br> xxxxxxxxxxxxxxxxxxx<br> xxxxxxxxxxxxxxxxxxx<br>
-              </div>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
+  <div class="imgbox"></div>
+  <div class="imgbox withfilter"></div>
 </body>
+
+</html>
