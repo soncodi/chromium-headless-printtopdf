@@ -1,90 +1,128 @@
 <!DOCTYPE html>
+<html>
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chrome bug - entire element clipped on page overflow</title>
   <style>
-    *, *:after, *:before { box-sizing: border-box; }
-    body, html, div, table, tbody, tr, td { margin: 0; padding: 0; border: 0; }
+    body, html, div, table, tr, td {
+      margin: 0;
+      padding: 0;
+      border: 0;
+    }
+
+    table {
+      table-layout: fixed;
+      border-collapse: collapse;
+    }
+
+    .template {
+      margin: 0 auto;
+    }
 
     .page {
-      position: relative;
-      margin: auto;
-      height: 3in;
+      break-inside: avoid;
+    }
+
+    .page,
+    .page-content {
+      height: 6in;
       width: 4in;
-      overflow: hidden;
-      page-break-inside: avoid;
-      border: 2px solid #000;
-    }
-
-    .bleed {
-      background-color: blue;
-
-      position: absolute;
-      top: -0.25in;
-      left: -0.25in;
-      right: -0.25in;
-      bottom: -0.25in;
-    }
-
-    .bleed.ok {
-      top: 0;
-      bottom: 0;
     }
 
     .page-content {
-      table-layout: fixed;
-      border-collapse: collapse;
+      background-color: #0ff;
+      overflow: hidden;
+    }
 
-      height: 100%;
-      background-color: #ff0;
+    .unpinned-parent {
+      position: relative;
+    }
+
+    .unpinned {
+      position: absolute;
+      z-index: 1;
+    }
+
+    .img {
+      display: block;
+      margin: 0;
+      padding: 0;
+      border: 0;
+      width: 0.5in;
+      height: 0.5in;
     }
   </style>
 </head>
-
 <body>
-  <div class="page">
-    <div class="bleed">
-      <table cellspacing="0" cellpadding="0" border="0" class="page-content">
-        <tbody>
-          <tr>
-            <td valign="top">
-              <div>
-                xxxxxxxxxxxxxxxxxxx<br> xxxxxxxxxxxxxxxxxxx<br> xxxxxxxxxxxxxxxxxxx<br>
-              </div>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-  <div class="page">
-    <div class="bleed">
-      <table cellspacing="0" cellpadding="0" border="0" class="page-content">
-        <tbody>
-          <tr>
-            <td valign="top">
-              <div>
-                xxxxxxxxxxxxxxxxxxx<br> xxxxxxxxxxxxxxxxxxx<br> xxxxxxxxxxxxxxxxxxx<br>
-              </div>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-  <div class="page">
-    <div class="bleed ok">
-      <table cellspacing="0" cellpadding="0" border="0" class="page-content">
-        <tbody>
-          <tr>
-            <td valign="top">
-              <div>
-                xxxxxxxxxxxxxxxxxxx<br> xxxxxxxxxxxxxxxxxxx<br> xxxxxxxxxxxxxxxxxxx<br>
-              </div>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
+  <table class="template">
+    <tr>
+      <td>
+        <div class="page">
+          <table class="page-content">
+            <tr>
+              <td class="unpinned-parent">
+
+                <!-- GOOD -->
+                <table class="unpinned" style="top: 528px; left: 0.1in;">
+                  <tr>
+                    <td>
+                      <img class="img" src="https://chromiumbugs.appspot.com/static/images/logo.png">
+                    </td>
+                  </tr>
+                </table>
+
+                <!-- BAD -->
+                <table class="unpinned" style="top: 529px; left: 0.8in;">
+                  <tr>
+                    <td>
+                      <img class="img" src="https://chromiumbugs.appspot.com/static/images/logo.png">
+                    </td>
+                  </tr>
+                </table>
+
+                <!-- GOOD -->
+                <table class="unpinned" style="bottom: -25px; left: 1.5in;">
+                  <tr>
+                    <td>
+                      <img class="img" src="https://chromiumbugs.appspot.com/static/images/logo.png">
+                    </td>
+                  </tr>
+                </table>
+
+                <!-- GOOD -->
+                <table class="unpinned" style="top: 5.5in; left: 2.2in;">
+                  <tr>
+                    <td>
+                      <img class="img" src="https://chromiumbugs.appspot.com/static/images/logo.png">
+                    </td>
+                  </tr>
+                </table>
+
+                <!-- BAD -->
+                <table class="unpinned" style="top: 5.501in; left: 2.9in;">
+                  <tr>
+                    <td>
+                      <img class="img" src="https://chromiumbugs.appspot.com/static/images/logo.png">
+                    </td>
+                  </tr>
+                </table>
+
+                <!-- GOOD -->
+                <table class="unpinned" style="bottom: -0.25in; left: 3.45in;">
+                  <tr>
+                    <td>
+                      <img class="img" src="https://chromiumbugs.appspot.com/static/images/logo.png">
+                    </td>
+                  </tr>
+                </table>
+
+              </td>
+            </tr>
+          </table>
+        </div>
+      </td>
+    </tr>
+  </table>
 </body>
+</html>

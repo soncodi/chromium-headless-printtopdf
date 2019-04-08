@@ -20,18 +20,17 @@ async function pdf(content) {
     await Page.loadEventFired();
 
     const pdfData = await Page.printToPDF({
-      landscape:           true,
+      landscape:           false,
       displayHeaderFooter: false,
       printBackground:     true,
       scale:               1,
-      paperHeight:         4,
-      paperWidth:          3,
+      paperHeight:         6,
+      paperWidth:          4,
       marginTop:           0,
       marginLeft:          0,
       marginRight:         0,
       marginBottom:        0,
-      pageRanges:          '', // all pages
-      preferCSSPageSize:   true
+      pageRanges:          ''
     });
 
     return Buffer.from(pdfData.data, 'base64');
